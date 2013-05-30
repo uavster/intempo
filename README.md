@@ -4,6 +4,8 @@ Intempo is an interpolation C++ template library with many different interpolati
 
 With Intempo, you can do things like:
 
+    using namespace intempo;
+    ...
     TimeSignal<double> mySignal;
     mySignal.addKeyPoint(0.0, 1.2);	// Signal value is 1.2 at 0.0
     mySignal.addKeyPoint(1.0, 4.3); // Signal value is 4.3 at 1.0
