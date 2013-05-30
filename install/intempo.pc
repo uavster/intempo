@@ -1,0 +1,9 @@
+# Package Information for pkg-config
+
+prefix=/usr/local
+
+Name: Intempo
+Description: Interpolation C++ template library
+Version: 1.0.0
+Libs: 
+Cflags: -I${prefix}/include/intempo

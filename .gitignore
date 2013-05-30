@@ -1,0 +1,4 @@
+*~
+build/*
+examples/normal/build/*
+examples/quaternions/build/*
