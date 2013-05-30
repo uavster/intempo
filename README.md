@@ -4,6 +4,7 @@ Intempo is an interpolation C++ template library with many different interpolati
 
 With Intempo, you can do things like:
 
+    #include <intempo.h>
     using namespace intempo;
     ...
     TimeSignal<double> mySignal;
