@@ -11,7 +11,7 @@ With Intempo, you can do things like:
     mySignal.addKeyPoint(0.0, 1.2);	// Signal value is 1.2 at 0.0
     mySignal.addKeyPoint(1.0, 4.3); // Signal value is 4.3 at 1.0
     
-    CubicInterpolator<double> ci(signal);
+    CubicInterpolator<double> ci(mySignal);
     double someValueInBetween = ci.getValue(2.8);
 
 In fact, you can interpolate whatever objects that have definitions for operators * and +. If you use Atlante's Vector3 objects, for instance, you can do:
@@ -21,7 +21,7 @@ In fact, you can interpolate whatever objects that have definitions for operator
     mySignal.addKeyPoint(1.0, Vector3(1, 0 ,0));
     mySignal.addKeyPoint(2.0, Vector3(0, 1, 0));
     
-    LinearInterpolator<double> li(signal);
+    LinearInterpolator<double> li(mySignal);
     // Resample signal in [-0.5, 2.5) with sampling period 0.1
     for (double time = -0.5; time < 2.5; time += 0.1) {
         Vector3 sample = li.getValue(time);
@@ -32,9 +32,9 @@ In fact, you can interpolate whatever objects that have definitions for operator
 With Intempo, you can also interpolate things in a spherical subspace of radius 1. This is especially useful to interpolate rotations with quaternions. For instance, using Atlante's Quaternion, you can do:
 
     TimeSignal<Quaternion> mySignal;
-    mySignal.addKeyPoint(0.0, Vector3(0, 0, 0));
-    mySignal.addKeyPoint(1.0, Vector3(1, 0 ,0));
-    mySignal.addKeyPoint(2.0, Vector3(0, 1, 0));
+    mySignal.addKeyPoint(0.0, Quaternion(Vector3(0, 0, 1), M_PI / 2.0));
+    mySignal.addKeyPoint(1.0, Quaternion(Vector3(1, 0, 0), 0.42));
+    mySignal.addKeyPoint(2.0, Quaternion(Vector3(0, 1, 0), 0.123));
     
     CubicInterpolator<Quaternion, SUBSPACE_SPHERICAL> ci(signal);
     // Resample signal in [-0.5, 2.5) with sampling period 0.1
@@ -52,7 +52,7 @@ The best way to learn how to use Intempo is by browsing the examples folder.
 
 Making your objects interpolable
 --------------------------------
-For a sample class to be interpolable, they must define operators for sum (+) and multiplication (*):
+For a sample class to be interpolable, it must define operators for sum (+) and multiplication (*):
 
 - \+ : The sum operator will add two objects of the class and return the result as another object of the same class.
 - \* : The multiplication operator will multiply an object of the class and a double and return the result as another object of the class.
@@ -67,7 +67,7 @@ In addition, **only if you need to interpolate in the spherical subspace**, the 
 Installing Intempo
 ------------------
 1. If you don't have Atlante in your system, install it first from https://github.com/uavster/atlante
-2. Install Intempo with CMake as you would normally do:
+2. Install Intempo with CMake as you would normally do. From the directory where Intempo is:
 
         mkdir build
         cd build
